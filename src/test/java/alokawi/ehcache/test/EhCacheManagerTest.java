@@ -19,12 +19,11 @@ public class EhCacheManagerTest extends TestCase {
 	@Test
 	public void testEhCachePutAndGet() {
 		EhCacheManager cacheManager = new EhCacheManager();
-		for (int i = 0; i < 50000; i++) {
+		for (int i = 0; i < 100000; i++) {
 
 			String key = UUID.randomUUID().toString();
 			String value = UUID.randomUUID().toString();
 			cacheManager.putCacheEntry(key, value);
-
 			assertEquals(value, cacheManager.getCacheEntry(key));
 
 		}
