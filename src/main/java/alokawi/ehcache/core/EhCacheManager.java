@@ -33,18 +33,11 @@ public class EhCacheManager extends AbstractCacheManager<String, String> {
 
 	private static CacheManager initializeCacheManager() {
 		return newCacheManagerBuilder()
-				.withCache(CACHE_ONE,
-						newCacheConfigurationBuilder(String.class, String.class, heap(5000).offheap(5, MB)
-								//.disk(10, MB)
-								)
-								.withExpiry(Expirations.timeToLiveExpiration(new Duration(1, TimeUnit.HOURS))))
-				.withCache(CACHE_TWO,
-						newCacheConfigurationBuilder(String.class, ArrayList.class,
-								heap(5000).offheap(5, MB)
-								//.disk(10, MB)
-								)
-										.withExpiry(Expirations.timeToLiveExpiration(new Duration(1, TimeUnit.HOURS))))
-				.build(true);
+				.withCache(CACHE_ONE, newCacheConfigurationBuilder(String.class, String.class, heap(5000).offheap(5, MB)
+				// .disk(10, MB)
+				).withExpiry(Expirations.timeToLiveExpiration(new Duration(1, TimeUnit.HOURS)))).withCache(CACHE_TWO, newCacheConfigurationBuilder(String.class, ArrayList.class, heap(5000).offheap(5, MB)
+				// .disk(10, MB)
+				).withExpiry(Expirations.timeToLiveExpiration(new Duration(1, TimeUnit.HOURS)))).build(true);
 	}
 
 	@Override
@@ -61,6 +54,10 @@ public class EhCacheManager extends AbstractCacheManager<String, String> {
 		Cache<String, String> cache = (Cache<String, String>) this.cacheManager.getCache(CACHE_ONE, key.getClass(),
 				String.class);
 		return cache.get(key);
+	}
+
+	@Override
+	public void getStatus() {
 	}
 
 }

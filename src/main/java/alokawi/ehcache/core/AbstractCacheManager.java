@@ -13,4 +13,6 @@ public abstract class AbstractCacheManager<K, V> {
 
 	abstract V getCacheEntry(K key);
 	
+	public abstract void getStatus();
+	
 }
